@@ -22,10 +22,10 @@ from django.urls import path, register_converter
 # r'^(?P<slug>[-\w\d]+),(?P<id>\d+)/$'
 # r'^(?P<slug:title>\s+,-)/$'
 urlpatterns = [
-    path('home/', views.home, name='home'),
-    path('images/', views.images, name="images"),
-    path('images/<title>/', views.timages, name="images"),
+    # path('home/', views.home, name='home'),
+    path('images/<title>/', views.images, name="images"),
+    path('image/<title>/', views.timages, name="image"),
     path('gifs/<title>/', views.g, name="g"),
-    path("gif/<title>",views.gif, name="gif"),
+    path("gif/<title>/",views.gif, name="gif"),
     # re_path(r'^images/(?P<title>[\s,-]+)/$', views.timages, name="images"),
 ]
