@@ -6,39 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="canonical" href="{{request.build_absolute_uri}}" >
-
-    <!-- COMMON TAGS -->
 <title>{{title|title}}</title>
-<!-- Search Engine -->
-<meta name="description" content="{{Des|title}}">
-<meta name="image" content="{{request.scheme}}://{{request.get_host}}/{{url}}">
+<meta name="description" content="{{Des|capfirst}}">
 <!-- Schema.org for Google -->
 <meta itemprop="name" content="{{title|title}}">
-<meta itemprop="description" content="{{Des|title}}">
-<meta itemprop="image" content="{{request.scheme}}://{{request.get_host}}/{{url}}">
-<!-- Twitter -->
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="{{title|title}}">
-<meta name="twitter:description" content="{{Des|title}}">
-<meta name="twitter:image:src" content="{{request.scheme}}://{{request.get_host}}/{{url}}">
-<!-- Open Graph general (Facebook, Pinterest & Google+) -->
-<meta name="og:title" content="{{title|title}}">
-<meta name="og:description" content="{{Des|title}}">
-<meta name="og:image" content="{{request.scheme}}://{{request.get_host}}/{{url}}">
-<meta name="og:url" content="{{request.build_absolute_uri}}">
-<meta name="og:site_name" content="Evcarshub.com">
-<meta name="og:type" content="website">
+<meta itemprop="description" content="{{Des|capfirst}}">
+<style>
+    img{
+  max-width: 100%;
+  height: auto;
+}
+</style>
+</style>
 </head>
 
 <body>
-
+<center>
     <h1>{{Des|capfirst}}</h1>
-
-<img src="/{{url}}" alt="{{imgDes}}">
-<!-- <figure>
     <img src="/{{url}}" alt="{{imgDes}}">
-    <figcaption>{{Des|capfirst}}</figcaption>
-  </figure> -->
-    
+</center>
 </body>
 </html>
