@@ -39,7 +39,7 @@ def timages(request, title=None):
     my_image = Image.open("static/google.png")
     title_font = ImageFont.truetype('carsimage/Roboto/Roboto-Regular.ttf', 18)
     image_editable = ImageDraw.Draw(my_image)
-    image_editable.text((115,228), title, (18, 17, 17), font=title_font)
+    image_editable.text((115,231), title, (18, 17, 17), font=title_font)
     imagePath = f"media/cars_images/{file_name}.jpg"
 
     my_image.save(imagePath)
@@ -86,7 +86,7 @@ def gif(request,title=None):
     os.makedirs(path) #creates a folder "gif-images"
     for i in range(len(title)):
         image_editable = ImageDraw.Draw(my_image)
-        image_editable.text((115,228), title[:i+1], (18, 17, 17), font=title_font)
+        image_editable.text((115,231), title[:i+1], (18, 17, 17), font=title_font)
         n = title[:i+1]
         imagePath = f"gif-images/{n}.jpg"
         my_image.save(imagePath)
