@@ -37,9 +37,9 @@ def timages(request, title=None):
    
 
     my_image = Image.open("static/google.png")
-    title_font = ImageFont.truetype('carsimage/Roboto/Roboto-Regular.ttf', 18)
+    title_font = ImageFont.truetype('carsimage/Roboto/Roboto-Medium.ttf', 20)
     image_editable = ImageDraw.Draw(my_image)
-    image_editable.text((115,231), title, (18, 17, 17), font=title_font)
+    image_editable.text((110,405), title, (18, 17, 17), font=title_font)
     imagePath = f"media/cars_images/{file_name}.jpg"
 
     my_image.save(imagePath)
@@ -65,7 +65,7 @@ def gif(request,title=None):
     if " " in title:
         return redirect(g, title)
     my_image = Image.open("static/google.png")
-    title_font = ImageFont.truetype('carsimage/Roboto/Roboto-Regular.ttf', 18)
+    title_font = ImageFont.truetype('carsimage/Roboto/Roboto-Regular.ttf', 20)
     file_name = title
     title = title.replace('-',' ')
 
@@ -82,11 +82,12 @@ def gif(request,title=None):
 
     BASE_DIR = Path(__file__).resolve().parent.parent 
     directory = "gif-images"
+
     path = os.path.join(BASE_DIR, directory)
     os.makedirs(path) #creates a folder "gif-images"
     for i in range(len(title)):
         image_editable = ImageDraw.Draw(my_image)
-        image_editable.text((115,231), title[:i+1], (18, 17, 17), font=title_font)
+        image_editable.text((110,405), title[:i+1], (18, 17, 17), font=title_font)
         n = title[:i+1]
         imagePath = f"gif-images/{n}.jpg"
         my_image.save(imagePath)
@@ -105,3 +106,62 @@ def gif(request,title=None):
     }
     return render(request,"images.html",context)
     
+
+
+
+def imagelist(request):
+    #list of car images
+    carlist = ["evcars tesla", "evcars Nano", "evcars jaguar"]
+
+    for car in carlist:
+        if " " in car:
+            title = '-'.join(car.strip().split())
+
+        file_name = title
+        title = title.replace('-',' ')
+        if exists(f"media/car-list-images/{file_name}.jpg"):
+            continue
+        my_image = Image.open("static/google.png")
+        title_font = ImageFont.truetype('carsimage/Roboto/Roboto-Medium.ttf', 20)
+        image_editable = ImageDraw.Draw(my_image)
+        image_editable.text((110,405), title, (18, 17, 17), font=title_font)
+        imagePath = f"media/car-list-images/{file_name}.jpg"
+        my_image.save(imagePath)
+    return render(request,"images.html")
+
+
+
+
+
+def giflist(request):
+    #list of car gifs
+    carlist = ["evcars tesla", "evcars Nano", "evcars jaguar"]
+
+    for car in carlist:
+        if " " in car:
+            title = '-'.join(car.strip().split())
+        my_image = Image.open("static/google.png")
+        title_font = ImageFont.truetype('carsimage/Roboto/Roboto-Regular.ttf', 20)
+        file_name = title
+        title = title.replace('-',' ')
+
+        if exists(f"media/gifs-list-images/{file_name}.gif"):
+            continue
+        BASE_DIR = Path(__file__).resolve().parent.parent 
+        directory = "gif-images"
+        path = os.path.join(BASE_DIR, directory)
+        os.makedirs(path) 
+        for i in range(len(title)):
+            image_editable = ImageDraw.Draw(my_image)
+            image_editable.text((110,405), title[:i+1], (18, 17, 17), font=title_font)
+            n = title[:i+1]
+            imagePath = f"gif-images/{n}.jpg"
+            my_image.save(imagePath)
+
+        frames = [Image.open(image) for image in glob.glob(f"gif-images/*.jpg")]
+        frame_one = frames[0]
+        frame_one.save(f"media/gifs-list-images/{file_name}.gif", format="GIF", append_images=frames,
+                save_all=True, duration=500, loop=0)
+        shutil.rmtree(path)
+    return render(request,"images.html")
+
